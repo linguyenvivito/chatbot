@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { chatClient } from "./api/chatClient";
+import { chatClient } from "../services/chatClient";
 
 type Role = "user" | "assistant";
 
@@ -57,12 +57,12 @@ export const ChatPage: React.FC = () => {
     setIsTyping(true);
 
     chatClient
-      .sendMessage(trimmed)
+      .sendMessage({ message: trimmed }) // Send the message to the backend
       .then((response) => {
         const botMessage: ChatMessage = {
           id: crypto.randomUUID(),
           role: "assistant",
-          text: response, // Use the response from the backend
+          text: response.message ?? "", // Use the response from the backend
           time: new Date().toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
