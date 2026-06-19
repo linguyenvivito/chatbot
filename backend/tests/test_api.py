@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 
 import backend.src.main
-from backend.src.features.chat import chat_api
+from features.chat import chat_api
 
 
 def test_read_root_returns_hello_world() -> None:
